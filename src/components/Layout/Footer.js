@@ -129,7 +129,7 @@ export default function Footer() {
                     <div class="footer-bottom">
                         <div
                             class="wrap-footer-bottom tf-container medium text-center align-items-center">
-                            <p class="text_white text-caption-1">©2026 <a href="#" class="text_white link">ANVKA.</a> All Rights Reserved.</p>
+                            <p class="text_white text-caption-1">©2026-27 <a href="#" class="text_white link">ANVKA.</a> All Rights Reserved.</p>
                             {/* <ul class="wrap">
                                 <li><a href="#" class="text-caption-1 link text_white">Terms Of Services</a></li>
                                 <li><a href="#" class="text-caption-1 link text_white">Privacy Policy</a></li>                                
