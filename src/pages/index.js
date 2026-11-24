@@ -211,7 +211,7 @@ export default function Home({
                         <div class="heading-section mb_20">
                             <div class="row align-items-center">
                                 <div class="col-lg-6 d-grid gap_16">
-                                    <div class="sub text-label text-uppercase split-text effect-up">About Anvka Healthcare11</div>
+                                    <div class="sub text-label text-uppercase split-text effect-up">About Anvka Healthcare</div>
                                     <h2 class="title split-text effect-right">Who We Are</h2>
                                 </div>
                                 <div class="col-lg-6">
