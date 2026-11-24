@@ -1,17 +1,14 @@
-"use client";
 import Head from "next/head"
-import Image from "next/image"
-import Link from "next/link"
-import React from "react"
-import { useEffect } from "react";
-import moment from "moment"
+import React, { useEffect } from "react"
+import NewsMarquee from "@/components/NewsMarquee"
+import styles from "@/styles/BlogDetail.module.css"
 
 /* =========================
    SERVER SIDE PROPS
 ========================= */
 export async function getServerSideProps(context) {
   try {
-    const posturl = context.params.blogsSlug
+    const posturl = encodeURIComponent(context.params.blogsSlug)
 
     const [postRes, recentRes, catedata] = await Promise.all([
       fetch(
@@ -38,7 +35,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         posts: postData[0],
-        posts5: recentData || [],
+        posts5: Array.isArray(recentData) ? recentData : [],
         cat: CatData || [],
       },
     }
@@ -52,111 +49,113 @@ export async function getServerSideProps(context) {
 }
 
 /* =========================
+   HELPERS
+========================= */
+const formatDate = (date) =>
+  new Date(date).toLocaleDateString("en-US", {
+    month: "long",
+    day: "2-digit",
+    year: "numeric",
+  })
+
+const readingTime = (html = "") => {
+  const words = html.replace(/<[^>]*>/g, " ").trim().split(/\s+/).filter(Boolean).length
+  return Math.max(1, Math.round(words / 200))
+}
+
+const stripTags = (html = "") => html.replace(/<[^>]*>/g, "").trim()
+
+/* =========================
    COMPONENT
 ========================= */
-const SingleBlog = ({ posts, posts5, cat }) => {
+const SingleBlog = ({ posts, posts5 }) => {
 
-        useEffect(() => {
-          document.body.classList.add("headerbodyc");
+  useEffect(() => {
+    document.body.classList.add("headerbodyc");
 
-          return () => {
-            document.body.classList.remove("headerbodyc");
-          };
-        }, []);
+    return () => {
+      document.body.classList.remove("headerbodyc");
+    };
+  }, []);
 
-
-
+  const author = posts?.yoast_head_json?.author
+  const moreNews = posts5.filter((p) => p.id !== posts.id)
 
   return (
     <>
-    <Head>
-        <title>
-         Details
-        </title>
+      <Head>
+        <title>{`${stripTags(posts?.title?.rendered) || "News"} - ANVKA`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-<main class="main">
-      {/* <div class="site-breadcrumb blogbanner">
-            <div class="container">
-                <h2 class="breadcrumb-title">Our Blog</h2>
-                <ul class="breadcrumb-menu">
-                    <li><a href="/">Home</a></li>
-                    <li class="active">Our Blog</li>
-                </ul>
+
+      <main className={`main ${styles.page}`}>
+        <div className="blog-post-detail">
+
+          {/* Banner */}
+          <div className="page-layout-v04">
+            <div className="img-style">
+              <img className="img-cover" width="1920" height="720" loading="eager" decoding="async" src={posts.extra_post_image_url} alt="page-title" />
             </div>
-        </div> */}
+            <div className="content">
+              <div className="tf-container align-items-center text-center"></div>
+            </div>
+          </div>
 
-        <div class="blog-post-detail">
+          {/* Article */}
+          <article className={styles.article}>
+            <a href="/news" className={styles.back}>← All News & Media</a>
 
-          <div class="page-layout-v04">
-                    <div class="img-style">
-                        <img class="img-cover" width="1920" height="720" loading="eager" decoding="async"  src={posts.extra_post_image_url} alt="page-title"/>
+            <div>
+              <span className={styles.tag}>News & Media</span>
+            </div>
+
+            <h1
+              className={styles.title}
+              dangerouslySetInnerHTML={{ __html: posts?.title?.rendered }}
+            />
+
+            <div className={styles.meta}>
+              {author && (
+                <>
+                  <div className={styles.author}>
+                    <span className={styles.avatar}>{author.charAt(0)}</span>
+                    <div>
+                      <span className={styles.metaLabel}>Author</span>
+                      <span className={styles.metaValue}>{author}</span>
                     </div>
-                    <div class="content">
-                        <div class="tf-container align-items-center text-center">
-                            {/* <ul class="tf-breadcrumb style-2 mb_16">
-                                <li class="text-label text_white lh-16"><a href="/index.html"
-                                        class="link text_white">HOME</a>
-                                </li>
-                                <li class="text_white text-label lh-16">About Us</li>
-                            </ul> */}
-                     
-                        </div>
-                    </div>
-                </div>
-                  <br></br>  <br></br>  <br></br>
+                  </div>
+                  <span className={styles.divider} />
+                </>
+              )}
+              <div>
+                <span className={styles.metaLabel}>Published</span>
+                <span className={styles.metaValue}>{formatDate(posts.date)}</span>
+              </div>
+              <span className={styles.divider} />
+              <div>
+                <span className={styles.metaLabel}>Read Time</span>
+                <span className={styles.metaValue}>{readingTime(posts?.content?.rendered)} min read</span>
+              </div>
+            </div>
 
-                        <div class="tf-container ">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    {/* <ul class="tf-social style-2 flex-column fixed-thumb">   
-                                      <li><a href="https://www.linkedin.com/company/anvkahealthcare/" class="icon-LinkedinLogo"></a></li>
-                                      <li><a href="https://www.facebook.com/anvkahealthcarec" class="icon-FaceBook-2"></a></li>
-                                      <li><a href="https://www.instagram.com/anvkahealthcare/" class="icon-instagram-logo"></a></li>                                        
-                                    </ul> */}
-                                </div>
-                                <div class="col-xl-8 col-md-10">
-                                    <div class="content-inner">
-                                        <div class="post-detail">
-                                            <div class="heading-title mb_40">
-                                               
-                                                <h3 class="title text-capitalize mb_16" dangerouslySetInnerHTML={{ __html: posts?.title?.rendered }}></h3>
-                                                <ul class="meta">
-                                                    <li>
-                                                        <div class="text-caption-1 text_secondary mb_4">Author</div>
-                                                        <div class="text-button text_primary">{posts.yoast_head_json.author}</div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="text-caption-1 text_secondary mb_4">Post Date</div>
-                                                        <div class="text-button text_primary">{new Date(
-                                  posts.date
-                                ).toLocaleDateString("en-US", {
-                                  month: "long",
-                                  day: "2-digit",
-                                  year: "numeric",
-                                })}</div>
-                                                    </li>
-                                                    {/* <li>
-                                                        <div class="text-caption-1 text_secondary mb_4">Comment</div>
-                                                        <div class="text-button text_primary">Full-Time</div>
-                                                    </li> */}
-                                                </ul>
-                                            </div>
-                                            <div dangerouslySetInnerHTML={{
-                            __html:
-                              posts?.content?.rendered || "",
-                          }}></div>
-                                        </div>
-                                     
-                                   
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div
+              className={styles.body}
+              dangerouslySetInnerHTML={{ __html: posts?.content?.rendered || "" }}
+            />
+          </article>
+        </div>
 
-                </main>   
-                <br></br><br></br><br></br>
+        {/* More news */}
+        {moreNews.length > 0 && (
+          <section className={styles.more}>
+            <div className={styles.moreHeading}>
+              <h3>More News</h3>
+              <a href="/news" className={styles.allNews}>View All →</a>
+            </div>
+            <NewsMarquee posts={moreNews} />
+          </section>
+        )}
+      </main>
     </>
   )
 }

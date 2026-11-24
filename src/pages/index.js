@@ -4,6 +4,7 @@ import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import YoutubeSlider from '@/components/YoutubeSlider'
+import NewsMarquee from '@/components/NewsMarquee'
 
 export async function getServerSideProps() {
     try {
@@ -434,47 +435,7 @@ export default function Home({
                         <div class="sub text-label text-uppercase split-text effect-up">News & Insights</div>
                         <h3 class="title split-text effect-right">Latest News & Insights</h3>
                     </div>
-                    <div class="swiper" data-preview="3" data-screen-xl="4" data-tablet="2" data-mobile="1"
-                        data-mobile-sm="2" data-space-lg="20" data-space-md="20" data-space="15">
-                        <div class="swiper-wrapper">
-
-                            {posts?.map((post) => (
-                                <div class="swiper-slide wow fadeInLeft" data-wow-delay="0.2s">
-                                    <div class="blog-item style-default hover-image-translate">
-                                        <a href={`/news/${post.slug}`} class="img-style mb_23">
-                                            <img loading="lazy" decoding="async" width="445" height="334"
-                                                src={post?.yoast_head_json?.og_image?.[0]?.url} alt="blog" />
-                                            {/* <div class="tag text-label">
-                                                Culture & People
-                                            </div> */}
-                                        </a>
-                                        <div class="content">
-                                            <ul class="meta-post font-3">
-                                                <li class="text-caption-1 ">
-                                                    <div>
-                                                        by <a href="#" class="link">{post.yoast_head_json.author}</a>
-                                                    </div>
-                                                </li>
-                                                <li class="text-caption-1">{new Date(
-                                                    post.date
-                                                ).toLocaleDateString("en-US", {
-                                                    month: "long",
-                                                    day: "2-digit",
-                                                    year: "numeric",
-                                                })}</li>
-                                            </ul>
-                                            <h5 class="titl line-clamp-2e blofont">
-                                                <a href={`/news/${post.slug}`} class="link hover-line-text " dangerouslySetInnerHTML={{ __html: post.title.rendered }}></a>
-                                            </h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-
-                        </div>
-                        <div class="sw-dots style-1 sw-pagination-layout text-center mt_24">
-                        </div>
-                    </div>
+                    <NewsMarquee posts={posts} />
                 </div>
 
 

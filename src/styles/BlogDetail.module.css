@@ -1,0 +1,303 @@
+/* =========================================================
+   Single news / blog page
+   Brand colours: red #e31e24, dark #2b2a29
+   ========================================================= */
+.page {
+  --brand-red: #e31e24;
+  --brand-dark: #2b2a29;
+  --muted: #8a8d93;
+  --line: #ececec;
+  --soft: #f7f7f7;
+}
+
+/* ---------- Article header ---------- */
+.article {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 56px 20px 24px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+.back:hover {
+  color: var(--brand-red);
+}
+
+.tag {
+  display: inline-block;
+  margin-bottom: 18px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: rgba(227, 30, 36, 0.08);
+  color: var(--brand-red);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0 0 26px;
+  color: var(--brand-dark);
+  font-size: clamp(26px, 3.4vw, 40px);
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 28px;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 40px;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--brand-dark);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.metaLabel {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+
+.metaValue {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--brand-dark);
+}
+
+.divider {
+  width: 1px;
+  height: 34px;
+  background: var(--line);
+}
+
+/* ---------- Article body (HTML from WordPress) ---------- */
+.body {
+  color: #4a4a4a;
+  font-size: 17px;
+  line-height: 1.85;
+}
+
+.body :global(p) {
+  margin: 0 0 22px;
+  color: #4a4a4a;
+  text-align: left;
+}
+
+.body :global(h2),
+.body :global(h3),
+.body :global(h4) {
+  margin: 36px 0 14px;
+  color: var(--brand-dark);
+  line-height: 1.3;
+}
+
+.body :global(a) {
+  color: var(--brand-red);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.body :global(ul),
+.body :global(ol) {
+  margin: 0 0 22px;
+  padding-left: 24px;
+}
+.body :global(li) {
+  list-style: disc;
+  margin-bottom: 8px;
+}
+
+/* ---------- Gallery: ticket-size thumbnails ---------- */
+.body :global(.wp-block-gallery) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  margin: 36px 0 44px;
+  padding: 30px 20px;
+  border-radius: 20px;
+  background: var(--soft);
+}
+
+/*
+  Ticket = fixed HEIGHT, width follows the photo's own shape
+  (WordPress sends width/height attributes, so the browser knows the ratio).
+  Result: every photo is shown whole — no cropping, no white bars.
+*/
+.body :global(.wp-block-gallery .wp-block-image) {
+  --ticket-h: 96px;
+  --zoom: 2.8; /* 96px x 2.8 ≈ 270px tall on hover */
+
+  position: relative;
+  flex: 0 0 auto;
+  float: none;
+  width: auto !important;
+  height: var(--ticket-h);
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+
+/* Ticket notches on the left and right edges */
+.body :global(.wp-block-gallery .wp-block-image)::before,
+.body :global(.wp-block-gallery .wp-block-image)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: var(--soft);
+  z-index: 4;
+  transition: opacity 0.2s ease;
+}
+.body :global(.wp-block-gallery .wp-block-image)::before { left: -5px; }
+.body :global(.wp-block-gallery .wp-block-image)::after  { right: -5px; }
+
+.body :global(.wp-block-gallery .wp-block-image img) {
+  position: relative;
+  z-index: 3;
+  display: block;
+  width: auto !important;
+  height: 100% !important;
+  max-width: none;
+  object-fit: contain;
+  padding: 3px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px -6px rgba(43, 42, 41, 0.35);
+  transform-origin: center center;
+  cursor: zoom-in;
+  transition:
+    transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.45s ease,
+    border-radius 0.45s ease;
+}
+
+/* Hover: same photo pops out as a bigger print with a white frame.
+   transform doesn't move the other tickets, so the row never jumps. */
+.body :global(.wp-block-gallery .wp-block-image:hover) {
+  z-index: 20;
+}
+.body :global(.wp-block-gallery .wp-block-image:hover)::before,
+.body :global(.wp-block-gallery .wp-block-image:hover)::after {
+  opacity: 0;
+}
+.body :global(.wp-block-gallery .wp-block-image:hover img) {
+  z-index: 5;
+  transform: scale(var(--zoom));
+  border-radius: 3px;
+  box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.4);
+}
+
+.body :global(.wp-block-gallery figcaption) {
+  display: none;
+}
+
+/* Images outside a gallery */
+.body :global(figure:not(.wp-block-gallery):not(.wp-block-image)) {
+  margin: 0 0 22px;
+}
+.body > :global(figure.wp-block-image) :global(img),
+.body :global(p img) {
+  max-width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
+/* ---------- More news ---------- */
+.more {
+  padding: 40px 0 70px;
+  background: linear-gradient(to bottom, #fff, var(--soft));
+}
+
+.moreHeading {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.moreHeading h3 {
+  margin: 0;
+  color: var(--brand-dark);
+  font-size: 28px;
+}
+
+.allNews {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand-red);
+  white-space: nowrap;
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 575px) {
+  .article {
+    padding-top: 36px;
+  }
+  .body {
+    font-size: 16px;
+  }
+  .body :global(.wp-block-gallery) {
+    gap: 14px;
+    padding: 22px 12px;
+  }
+  .body :global(.wp-block-gallery .wp-block-image) {
+    --ticket-h: 76px;
+    --zoom: 2.6;
+  }
+  .divider {
+    display: none;
+  }
+}
+
+/* Touch screens: no hover, so show larger thumbnails instead */
+@media (hover: none) {
+  .body :global(.wp-block-gallery .wp-block-image) {
+    --ticket-h: 120px;
+  }
+  .body :global(.wp-block-gallery .wp-block-image:hover img) {
+    transform: none;
+    border-radius: 8px;
+  }
+}
