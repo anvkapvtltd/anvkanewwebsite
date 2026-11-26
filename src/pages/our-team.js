@@ -6,12 +6,18 @@ import styles from "@/styles/TeamList.module.css";
 const team = [
     { name: "Mr. Deepak Singhal", role: "CEO", company: "ANVKA", image: "/assets/images/team/deepak-singhal.webp" },
     { name: "Mr. Nitin Yadav", role: "Operations Head", company: "ANVKA", image: "/assets/images/team/nitin-yadav.webp" },
-    { name: "Ms. Devpriya", role: "HR Head", company: "ANVKA", image: "/assets/images/team/devpriya.webp" },
-    { name: "Mr. Ashish Jain", role: "Senior General Manager", company: "LINTEX", image: "/assets/images/team/ashish-jain.webp" },
-    { name: "Mr. Yogesh Mittal", role: "General Manager", company: "CareTAB.ai", image: "/assets/images/team/yogesh-mittal.webp" },
-    { name: "Mr. Nishil Kumar", role: "HOD", company: "Curewith3D", image: "/assets/images/team/nishil-kumar.webp" },
-    { name: "Mr. Vimal Vijay", role: "Manager", company: "AkieChef", image: "/assets/images/team/vimal-vijay.webp" },
-    { name: "Ms. Surbhi Mehrotra", role: "Manager", company: "Tumble", image: "/assets/images/team/surbhi-mehrotra.webp" },
+    { name: "Mrs. Devpriya", role: " Human Resources", company: "ANVKA", image: "/assets/images/team/devpriya.webp" },
+    { name: "Mr. Vineet Upadhyay", role: "Finance", company: "ANVKA", image: "/assets/images/team/vineet.jpeg" },
+    { name: "Mr. Ashish Jain", role: "LINTEX", company: "LINTEX", image: "/assets/images/team/ashish-jain.webp" },
+    { name: "Mr. Yogesh Mittal", role: " CareTAB.ai", company: "CareTAB.ai", image: "/assets/images/team/yogesh-mittal.webp" },
+    { name: "Mr. Manvendra", role: " Medical Implants", company: "CareTAB.ai", image: "/assets/images/team/Manvendra.png" },
+    { name: "Mr. Nishil Kumar", role: "Curewith3D", company: "Curewith3D", image: "/assets/images/team/nishil-kumar.webp" },
+    { name: "Mrs. Bhavana Malik", role: "IndiaMD", company: "Curewith3D", image: "/assets/images/team/bhavana-malik.webp" },
+    { name: "Mr. Vimal Vijay", role: "AkieChef", company: "AkieChef", image: "/assets/images/team/vimal-vijay.webp" },
+    { name: "Ms. Surbhi Mehrotra", role: "Tumble Salon", company: "Tumble", image: "/assets/images/team/surbhi-mehrotra.webp" },
+    { name: "Mr. Jitendra Singh", role: "Admin & Liaisoning", company: "Tumble", image: "/assets/images/team/jitendra_singh.jpeg" },
+    { name: "Mr. Abhijeet Singh", role: "Digital Marketing", company: "Tumble", image: "/assets/images/team/Abhijeet-Sir.jpeg" },
+    { name: "Mr. Surender Singh", role: "Supply Chain", company: "Tumble", image: "/assets/images/team/Surendra-Sir.jpeg" },
 ];
 
 export default function Home() {
@@ -59,7 +65,7 @@ export default function Home() {
 
                                         {/* Details on the right */}
                                         <div className={styles.content}>
-                                            <span className={styles.company}>{member.company}</span>
+                                            {/* <span className={styles.company}>{member.company}</span> */}
                                             <h5 className={styles.name}>{member.name}</h5>
                                             <p className={styles.role}>{member.role}</p>
                                             <span className={styles.line} />
