@@ -1,23 +1,24 @@
 import Head from "next/head";
+import Image from "next/image";
 import ProtectedContent from '@/components/ProtectedContent'
 import styles from "@/styles/TeamList.module.css";
 
 // Leadership team — add / edit people here
 const team = [
-    { name: "Mr. Deepak Singhal", role: "CEO", company: "ANVKA", image: "/assets/images/team/deepak-singhal.webp" },
-    { name: "Mr. Nitin Yadav", role: "Operations Head", company: "ANVKA", image: "/assets/images/team/nitin-yadav.webp" },
-    { name: "Mrs. Devpriya", role: " Human Resources", company: "ANVKA", image: "/assets/images/team/devpriya.webp" },
-    { name: "Mr. Vineet Upadhyay", role: "Finance", company: "ANVKA", image: "/assets/images/team/vineet.jpeg" },
-    { name: "Mr. Ashish Jain", role: "LINTEX", company: "LINTEX", image: "/assets/images/team/ashish-jain.webp" },
-    { name: "Mr. Yogesh Mittal", role: " CareTAB.ai", company: "CareTAB.ai", image: "/assets/images/team/yogesh-mittal.webp" },
-    { name: "Mr. Manvendra", role: " Medical Implants", company: "CareTAB.ai", image: "/assets/images/team/Manvendra.png" },
+    { name: "Mr. Deepak Singhal", role: "CEO", company: "ANVKA", image: "/assets/images/team/deepak-singhal2.jpeg" },
+    { name: "Mr. Nitin Yadav", role: "Operations Head", company: "ANVKA", image: "/assets/images/team/nitin-yadav2.jpeg" },
+    { name: "Mrs. Devpriya", role: " Human Resources", company: "ANVKA", image: "/assets/images/team/devpriya2.jpeg" },
+    { name: "Mr. Vineet Upadhyay", role: "Finance", company: "ANVKA", image: "/assets/images/team/vineet2.jpeg" },
+    { name: "Mr. Ashish Jain", role: "LINTEX", company: "LINTEX", image: "/assets/images/team/ashish-jain2.jpeg" },
+    { name: "Mr. Yogesh Mittal", role: " CareTAB.ai", company: "CareTAB.ai", image: "/assets/images/team/yogesh-mittal2.jpeg" },
+    { name: "Mr. Manvendra", role: " Medical Implants", company: "CareTAB.ai", image: "/assets/images/team/Manvendra2.jpeg" },
     { name: "Mr. Nishil Kumar", role: "Curewith3D", company: "Curewith3D", image: "/assets/images/team/nishil-kumar.webp" },
     { name: "Mrs. Bhavana Malik", role: "IndiaMD", company: "Curewith3D", image: "/assets/images/team/bhavana-malik.webp" },
-    { name: "Mr. Vimal Vijay", role: "AkieChef", company: "AkieChef", image: "/assets/images/team/vimal-vijay.webp" },
-    { name: "Ms. Surbhi Mehrotra", role: "Tumble Salon", company: "Tumble", image: "/assets/images/team/surbhi-mehrotra.webp" },
-    { name: "Mr. Jitendra Singh", role: "Admin & Liaisoning", company: "Tumble", image: "/assets/images/team/jitendra_singh.jpeg" },
-    { name: "Mr. Abhijeet Singh", role: "Digital Marketing", company: "Tumble", image: "/assets/images/team/Abhijeet-Sir.jpeg" },
-    { name: "Mr. Surender Singh", role: "Supply Chain", company: "Tumble", image: "/assets/images/team/Surendra-Sir.jpeg" },
+    { name: "Mr. Vimal Vijay", role: "AkieChef", company: "AkieChef", image: "/assets/images/team/vimal-vijay2.jpeg" },
+    { name: "Ms. Surbhi Mehrotra", role: "Tumble Salon", company: "Tumble", image: "/assets/images/team/surbhi-mehrotra2.jpeg" },
+    { name: "Mr. Jitendra Singh", role: "Admin & Liaisoning", company: "Tumble", image: "/assets/images/team/jitendra_singh2.jpeg" },
+    { name: "Mr. Abhijeet Singh", role: "Digital Marketing", company: "Tumble", image: "/assets/images/team/Abhijeet-Sir2.jpeg" },
+    { name: "Mr. Surender Singh", role: "Supply Chain", company: "Tumble", image: "/assets/images/team/Surendra-Sir2.jpeg" },
 ];
 
 export default function Home() {
@@ -60,7 +61,17 @@ export default function Home() {
                                     <article key={member.name} className={styles.card}>
                                         {/* Passport-size photo on the left */}
                                         <div className={styles.photo}>
-                                            <img loading="lazy" decoding="async" src={member.image} alt={member.name} />
+                                            {/* <img loading="lazy" decoding="async" src={member.image} alt={member.name} /> */}
+                                            {/* next/image: server resizes the 2000px photo to the shown size, so it stays sharp */}
+                                            <span className={styles.photoInner}>
+                                                <Image
+                                                    src={member.image}
+                                                    alt={member.name}
+                                                    fill
+                                                    sizes="(max-width: 575px) 130px, 112px"
+                                                    quality={90}
+                                                />
+                                            </span>
                                         </div>
 
                                         {/* Details on the right */}

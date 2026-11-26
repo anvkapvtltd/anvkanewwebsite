@@ -6,6 +6,8 @@ const nextConfig = {
     images: {
     // Bahar se hotlink hone se rokta hai
     remotePatterns: [],
+    // Allowed image quality values (team photos use 90 for a sharper look)
+    qualities: [75, 90],
   },
 
    async headers() {
