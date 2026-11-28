@@ -9,6 +9,11 @@ import 'lightgallery/css/lg-thumbnail.css';
 // import plugins if you need
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import lgZoom from 'lightgallery/plugins/zoom';
+import styles from "@/styles/CultureGallery.module.css";
+
+// Culture gallery photos — add / remove numbers here (c15, c16 are hidden)
+const galleryImages = [1, 2, 4, 5, 6, 7, 8, 9, 10, 12, 17, 18, 20, 21, 22, 23, 24, 25]
+	.map((n) => `/assets/images/culture/c${n}.webp`);
 
 export default function Home() {
 
@@ -54,6 +59,29 @@ export default function Home() {
                             <div class="wrap-box tf-spacing-1">
                                 <div class="tf-container">
                                     <div class="row">
+                                        {/* New gallery: small tiles, 5 per row (images list is at the top of this file) */}
+                                        <div className={`content-inner ${styles.wrap}`}>
+                                            <LightGallery
+                                                speed={500}
+                                                plugins={[lgThumbnail, lgZoom]}
+                                                elementClassNames={styles.grid}
+                                            >
+                                                {galleryImages.map((src, i) => (
+                                                    <a key={src} href={src} className={styles.item}>
+                                                        <img
+                                                            src={src}
+                                                            alt={`ANVKA culture ${i + 1}`}
+                                                            width="1000"
+                                                            height="667"
+                                                            loading="lazy"
+                                                            decoding="async"
+                                                        />
+                                                    </a>
+                                                ))}
+                                            </LightGallery>
+                                        </div>
+
+                                        {/* Old gallery (3 per row, float) — kept for reference
                                         <div class="content-inner galrm">
                                             <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
 
@@ -88,12 +116,7 @@ export default function Home() {
                                                 <a href="/assets/images/culture/c12.webp">
                                                     <img alt="img1" className="dds" src="/assets/images/culture/c12.webp" />
                                                 </a>
-                                                {/* <a href="/assets/images/culture/c15.webp">
-                                                    <img alt="img1" className="dds" src="/assets/images/culture/c15.webp" />
-                                                </a> */}
-                                                {/* <a href="/assets/images/culture/c16.webp">
-                                                    <img alt="img1" className="dds" src="/assets/images/culture/c16.webp" />
-                                                </a> */}
+                                                (c15 and c16 were hidden here)
                                                 <a href="/assets/images/culture/c17.webp">
                                                     <img alt="img1" className="dds" src="/assets/images/culture/c17.webp" />
                                                 </a>
@@ -123,6 +146,7 @@ export default function Home() {
 
                                             </LightGallery>
                                         </div>
+                                        */}
                                     </div>
                                 </div>
                             </div>

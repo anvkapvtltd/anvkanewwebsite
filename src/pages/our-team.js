@@ -6,7 +6,7 @@ import styles from "@/styles/TeamList.module.css";
 // Leadership team — add / edit people here
 const team = [
     { name: "Mr. Deepak Singhal", role: "CEO", company: "ANVKA", image: "/assets/images/team/deepak-singhal2.jpeg" },
-    { name: "Mr. Nitin Yadav", role: "Operations Head", company: "ANVKA", image: "/assets/images/team/nitin-yadav2.jpeg" },
+    { name: "Mr. Nitin Yadav", role: "Operations", company: "ANVKA", image: "/assets/images/team/nitin-yadav2.jpeg" },
     { name: "Mrs. Devpriya", role: " Human Resources", company: "ANVKA", image: "/assets/images/team/devpriya2.jpeg" },
     { name: "Mr. Vineet Upadhyay", role: "Finance", company: "ANVKA", image: "/assets/images/team/vineet2.jpeg" },
     { name: "Mr. Ashish Jain", role: "LINTEX", company: "LINTEX", image: "/assets/images/team/ashish-jain2.jpeg" },
@@ -19,6 +19,7 @@ const team = [
     { name: "Mr. Jitendra Singh", role: "Admin & Liaisoning", company: "Tumble", image: "/assets/images/team/jitendra_singh2.jpeg" },
     { name: "Mr. Abhijeet Singh", role: "Digital Marketing", company: "Tumble", image: "/assets/images/team/Abhijeet-Sir2.jpeg" },
     { name: "Mr. Surender Singh", role: "Supply Chain", company: "Tumble", image: "/assets/images/team/Surendra-Sir2.jpeg" },
+    { name: "Mr. Satinder Singh", role: "Legal", company: "Tumble", image: "/assets/images/team/Satinder-Sir2.jpeg" },
 ];
 
 export default function Home() {
